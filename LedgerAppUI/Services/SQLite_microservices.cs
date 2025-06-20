@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Xml;
 
-
 // Handle exceptions of SQLite
 namespace LedgerAppUI.Services
 {
-    internal class Database
+    public class Database
     {
-        readonly string _connection_string;
+        readonly string file_ptr;
 
         public Database(string file_name)
         {
-            _connection_string = $"Data Source={file_name};";
+            file_ptr = file_name;
         }
         public void createNewDB(string CreateNewDBCommand)
         { 
@@ -27,8 +26,8 @@ namespace LedgerAppUI.Services
                 //    Salt TEXT NOT NULL,
                 //    HashedPassword TEXT NOT NULL
                 //);"
-        
-            using var connection = new SQLiteConnection(_connection_string) ;
+
+            using var connection = new SQLiteConnection($"Data Source={file_ptr};") ;
             connection.Open();
 
             using var command = connection.CreateCommand();
@@ -39,7 +38,7 @@ namespace LedgerAppUI.Services
         public void push_to_DB(string Insert_command , Action<SQLiteCommand>? parameters = null)
         // command form "INSERT INTO Users (Username, Salt, HashedPassword) VALUES (@username, @salt, @hash);"
         {
-            using var connection = new SQLiteConnection(_connection_string);
+            using var connection = new SQLiteConnection($"Data Source={file_ptr};");
             connection.Open();
 
             using var command = new SQLiteCommand(Insert_command, connection);
@@ -51,7 +50,10 @@ namespace LedgerAppUI.Services
         public List<Dictionary<string, object>> Fetch_from_DB(string Fetch_command , Action<SQLiteCommand>? parameters = null)
         {
             var result = new List<Dictionary<string, object>>();
-            using var connection = new SQLiteConnection(_connection_string);
+
+            if (!System.IO.File.Exists(file_ptr)) return result; // if file does not exist
+
+            using var connection = new SQLiteConnection($"Data Source={file_ptr};");
             connection.Open();
 
             using var command = new SQLiteCommand(Fetch_command , connection);
@@ -71,6 +73,26 @@ namespace LedgerAppUI.Services
 
             return result;
 
+        }
+
+        public void Update_DB(string Update_command, Action<SQLiteCommand>? parameters = null)
+        {
+            using var connection = new SQLiteConnection($"Data Source={file_ptr};");
+            connection.Open();
+
+            using var command = new SQLiteCommand(Update_command, connection);
+            parameters?.Invoke(command);
+            command.ExecuteNonQuery();
+        }
+
+        public void Delete_from_DB(string Delete_command, Action<SQLiteCommand>? parameters = null)
+        {
+            using var connection = new SQLiteConnection($"Data Source={file_ptr};");
+            connection.Open();
+
+            using var command = new SQLiteCommand(Delete_command, connection);
+            parameters?.Invoke(command);
+            command.ExecuteNonQuery();
         }
     }
 

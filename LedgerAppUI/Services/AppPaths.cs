@@ -11,7 +11,7 @@ namespace LedgerAppUI.Services
     {
         public static readonly string BahiFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Bahi-Khata");
         public static readonly string UserDataPath = Path.Combine(BahiFolderPath, "UserData");
-        public static readonly string userDbpath = Path.Combine(BahiFolderPath, "User.db");
+        public static readonly string userDbpath = Path.Combine(UserDataPath, "User.db");
 
     }
 }
