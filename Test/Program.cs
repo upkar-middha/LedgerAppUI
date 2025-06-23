@@ -6,23 +6,25 @@ internal class Test
 {
     public static void Main(string[] args)
     {
-        string password = "chuttad";
-        string UserName = "upkarmiddha";
-        string MobileNumber = "1234567890";
 
-        string command = "SELECT * FROM Users;\r\n";
-        LedgerAppUI.Services.Database db = new LedgerAppUI.Services.Database(AppPaths.userDbpath);
 
-        List<Dictionary<string, object>> rows = db.Fetch_from_DB(command);
-        for(int i = 0; i < rows.Count; i++)
-        {
-            Console.WriteLine($"Row {i + 1}:");
-            foreach (var kvp in rows[i])
-            {
-                Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-            }
-            Console.WriteLine();
-        }
+        //string password = "chuttad";
+        //string UserName = "upkarmiddha";
+        //string MobileNumber = "1234567890";
+
+        //string command = "SELECT * FROM Users;\r\n";
+        //LedgerAppUI.Services.Database db = new LedgerAppUI.Services.Database(AppPaths.userDbpath);
+
+        //List<Dictionary<string, object>> rows = db.Fetch_from_DB(command);
+        //for(int i = 0; i < rows.Count; i++)
+        //{
+        //    Console.WriteLine($"Row {i + 1}:");
+        //    foreach (var kvp in rows[i])
+        //    {
+        //        Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+        //    }
+        //    Console.WriteLine();
+        //}
 
         //try
         //{
