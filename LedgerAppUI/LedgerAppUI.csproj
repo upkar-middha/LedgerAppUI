@@ -9,8 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Helper\" />
     <Folder Include="viewModel\" />
   </ItemGroup>
 
