@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LedgerAppUI"
         xmlns:views="clr-namespace:LedgerAppUI.View"
-
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowState="Maximized"
+        Title="MainWindow">
+
     <Grid>
-        <views:SignUpView />
+        <!-- Scale DashBoard to fullscreen with fixed layout -->
+        <Viewbox Stretch="Fill">
+            <views:DashBoard Width="800" Height="450"/>
+        </Viewbox>
     </Grid>
 </Window>
