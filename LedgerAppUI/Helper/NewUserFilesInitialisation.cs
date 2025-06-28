@@ -12,14 +12,44 @@ namespace LedgerAppUI.Helper
     {
         public static void init()
         {
-            Directory.CreateDirectory(AppPaths.CurrentUserPath); // create a new directory to keep data of new user
+            // Create directory
+            Directory.CreateDirectory(AppPaths.CurrentUserPath);
+
+            // Create Accounts table
             Database db = new(AppPaths.CurrentUserAccountDbPath);
-            string cmd = "CREATE TABLE IF NOT EXISTS Accounts (\r\n  name VARCHAR(40) PRIMARY KEY,\r\n  grp VARCHAR(40) NOT NULL,\r\n  reg_date DATE NOT NULL,\r\n  op_bal INT DEFAULT 0,\r\n  address VARCHAR(100),\r\n  city VARCHAR(20),\r\n  state VARCHAR(20),\r\n  mobile1 CHAR(10) not NULL,\r\n  mobile2 CHAR(10),\r\n  pan CHAR(10),\r\n  );";
+            string cmd = @"
+                            CREATE TABLE IF NOT EXISTS Accounts (
+                              name VARCHAR(40) PRIMARY KEY,
+                              grp VARCHAR(40) NOT NULL,
+                              reg_date TEXT NOT NULL,           
+                              address VARCHAR(100),
+                              city VARCHAR(20),
+                              state VARCHAR(20),
+                              mobile1 CHAR(10) NOT NULL,
+                              mobile2 CHAR(10),
+                              pan CHAR(10)
+                            );";
             db.createNewDB(cmd);
 
+            // Create Ledger_grps table
             db = new(AppPaths.CurrentUserGroupDbPath);
-            cmd = "CREATE TABLE IF NOT EXISTS Ledger_grps (\r\n  name VARCHAR(40) PRIMARY KEY\r\n  );";
+            cmd = @"
+                    CREATE TABLE IF NOT EXISTS Ledger_grps (
+                      name VARCHAR(40) PRIMARY KEY
+                    );";
             db.createNewDB(cmd);
+
+            // Create Bahi table
+            db = new(AppPaths.CurrentUserBahiPath);
+            cmd = @"
+                        CREATE TABLE IF NOT EXISTS Bahi (
+                          name TEXT,
+                          date TEXT,       
+                          balance INTEGER,
+                          grp TEXT
+                        );";
+            db.createNewDB(cmd);
+
         }
     }
 }

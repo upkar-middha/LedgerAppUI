@@ -13,8 +13,9 @@ namespace LedgerAppUI.Services
         public static readonly string UserDataPath = Path.Combine(BahiFolderPath, "UserData");
         public static readonly string userDbpath = Path.Combine(UserDataPath, "User.db");
         public static readonly string CurrentUserPath = Path.Combine(BahiFolderPath, CurrentSession.SessionName);
-        public static readonly string CurrentUserAccountDbPath = Path.Combine(CurrentUserPath , "accounts");
-        public static readonly string CurrentUserGroupDbPath = Path.Combine(CurrentUserPath, CurrentSession.SessionName + "groups");
+        public static readonly string CurrentUserAccountDbPath = Path.Combine(CurrentUserPath , "Accounts");
+        public static readonly string CurrentUserGroupDbPath = Path.Combine(CurrentUserPath,  "Groups");
+        public static readonly string CurrentUserBahiPath = Path.Combine(CurrentUserPath,  "Bahi");
 
     }
 }
